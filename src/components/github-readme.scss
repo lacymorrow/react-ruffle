@@ -1,0 +1,26 @@
+@import "./github-markdown-styles.scss";
+
+.markdown-body,
+.markdown-body img {
+  background-color: transparent;
+  display: inline-block;
+}
+
+.markdown-body ul {
+  list-style: disc;
+}
+
+.markdown-body h1 img,
+.markdown-body h2 img,
+.markdown-body h3 img,
+.markdown-body h4 img,
+.markdown-body h5 img,
+.markdown-body h6 img,
+.markdown-body p img,
+.markdown-body p a {
+  display: inline-block;
+}
+
+.markdown-body table {
+  width: auto;
+}
