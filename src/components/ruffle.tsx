@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 
+// type annotations for props
+// we allow any object props to be passed to the object tag
+
 type Props = {
   src: string;
-  style?: React.CSSProperties;
+  style?: Object;
   className?: string;
+  rest?: Object;
 };
 
 export const Ruffle = ({ src, style, className, ...rest }: Props) => {
