@@ -7,16 +7,12 @@ type Props = {
 };
 
 export const Ruffle = ({ src, style, className, ...rest }: Props) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
-
   useEffect(() => {
     // create script tag
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@ruffle-rs/ruffle";
     script.async = true;
-    script.onload = () => {
-      setIsLoaded(true);
-    };
+    script.onload = () => {};
 
     // add script tag to body
     document.body.appendChild(script);
