@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 // import "../vendor/ruffle.js";
 
-type Props = {
+export interface RuffleProps
+  extends React.ObjectHTMLAttributes<HTMLObjectElement> {
   src: string;
-  style?: Object;
-  className?: string;
   rest?: Object;
-};
+}
 
-export const Ruffle = ({ src, style, className, ...rest }: Props) => {
+export const Ruffle: React.FC<RuffleProps> = ({
+  src,
+  ...rest
+}: RuffleProps) => {
   useEffect(() => {
     // create script tag
     const script = document.createElement("script");
@@ -26,7 +28,7 @@ export const Ruffle = ({ src, style, className, ...rest }: Props) => {
 
   return (
     <>
-      <object data={src} className={className} style={style} {...rest}>
+      <object data={src} {...rest}>
         <param name="movie" value={src} />
         <p>
           Your browser does not support WASM,{" "}
