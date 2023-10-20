@@ -40,4 +40,6 @@ export const Ruffle = ({ src, style, className, ...rest }: Props) => {
   );
 };
 
+export const Flash = Ruffle;
+
 export default Ruffle;
