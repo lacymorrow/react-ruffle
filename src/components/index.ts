@@ -1,1 +1,1 @@
-export { default as GitHubReadme } from './github-readme'
+export { default as Ruffle } from './ruffle'

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 
 type Props = {
   src: string;
+  style?: React.CSSProperties;
   className?: string;
 };
 
-export const Ruffle = ({ src, className, ...rest }: Props) => {
+export const Ruffle = ({ src, style, className, ...rest }: Props) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   useEffect(() => {
@@ -27,12 +28,7 @@ export const Ruffle = ({ src, className, ...rest }: Props) => {
 
   return (
     <>
-      <object
-        data={src}
-        className={className}
-        style={{ width: "100%" }}
-        {...rest}
-      >
+      <object data={src} className={className} style={style} {...rest}>
         <param name="movie" value={src} />
         <p>
           Your browser does not support WASM,{" "}
