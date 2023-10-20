@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-
-// type annotations for props
-// we allow any object props to be passed to the object tag
+// import "../vendor/ruffle.js";
 
 type Props = {
   src: string;
