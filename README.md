@@ -7,7 +7,8 @@
 
 A React component for rendering Flash & ActionScript content using the Rust-based Ruffle emulator.
 
-[**Storybook Demo**](https://www.chromatic.com/component?appId=6528a9ef83709c394594fc93&csfId=lacymorrow-react-ruffle&buildNumber=5&k=6528ae3054fd2afdd25fb253-1200px-interactive-true&h=3&b=-1)
+[**Storybook Demo**](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle&buildNumber=2&k=6532904658dcf2e0c272b337-1200px-interactive-true&h=6&b=-1
+)
 
 
 ## Features

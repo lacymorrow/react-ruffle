@@ -10,7 +10,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof Ruffle> = (args) => (
-  <div style={{ display: "contents", margin: "2rem" }}>
+  <div style={{ display: "contents" }}>
     <Ruffle {...args} />
   </div>
 );
