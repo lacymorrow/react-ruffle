@@ -1,18 +1,23 @@
 # react-ruffle [<img src="https://github.com/lacymorrow/crossover/raw/master/src/static/meta/patreon-button.webp" style="height:40px;" height="40" align="right" />](https://www.patreon.com/bePatron?u=55065733)
-[![npm version](https://badge.fury.io/js/react-ruffle.svg)](https://badge.fury.io/js/react-ruffle) [![Maintainability](https://api.codeclimate.com/v1/badges/05ee4efc2d29918f2ba1/maintainability)](https://codeclimate.com/github/lacymorrow/react-ruffle/maintainability) [![Known Vulnerabilities](https://snyk.io/test/github/lacymorrow/react-ruffle/badge.svg)](https://snyk.io/test/github/lacymorrow/react-ruffle)
+[![npm version](https://badge.fury.io/js/react-ruffle.svg)](https://badge.fury.io/js/react-ruffle) [![Known Vulnerabilities](https://snyk.io/test/github/lacymorrow/react-ruffle/badge.svg)](https://snyk.io/test/github/lacymorrow/react-ruffle) [![Maintainability](https://api.codeclimate.com/v1/badges/05ee4efc2d29918f2ba1/maintainability)](https://codeclimate.com/github/lacymorrow/react-ruffle/maintainability)
 
 
 > Render Flash media in React.JS
 
 A React component for rendering Flash & ActionScript content using the Rust-based Ruffle emulator.
 
-[**Storybook Demo**](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle&buildNumber=2&k=6532904658dcf2e0c272b337-1200px-interactive-true&h=6&b=-1
-)
-
+Read the [Ruffle documentation](https://ruffle.rs/) for more information.
 
 ## Features
  * Supports ActionScript and Flash media
  * Click to play animated content
+
+## Demo
+
+### [**Storybook Demo**](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle&buildNumber=2&k=6532904658dcf2e0c272b337-1200px-interactive-true&h=6&b=-1
+)
+
+
 
 
 ## Install
