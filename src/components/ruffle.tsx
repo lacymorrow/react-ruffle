@@ -4,11 +4,20 @@ import React, { useEffect } from "react";
 export interface RuffleProps
   extends React.ObjectHTMLAttributes<HTMLObjectElement> {
   src: string;
+  config?: any;
   rest?: Object;
+}
+
+// https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html
+declare global {
+  interface Window {
+    RufflePlayer: any;
+  }
 }
 
 export const Ruffle: React.FC<RuffleProps> = ({
   src,
+  config,
   ...rest
 }: RuffleProps) => {
   useEffect(() => {
@@ -16,7 +25,12 @@ export const Ruffle: React.FC<RuffleProps> = ({
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@ruffle-rs/ruffle";
     script.async = true;
-    script.onload = () => {};
+    script.onload = () => {
+      if (config) {
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = config
+      }
+    };
 
     // add script tag to body
     document.body.appendChild(script);
