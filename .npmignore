@@ -1,1 +1,4 @@
+# Ignore some files when building the plugin
+
+# Ignore the static directory: contains files used in the readme
 static
