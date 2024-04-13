@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { RuffleProps } from "./t/ruffle";
+import { RuffleProps } from "../types/ruffle";
 
 // It would be great to load ruffle locally, rather than using unpkg.com
 // However, bundling the ruffle library with the project is not trivial

@@ -1,5 +1,6 @@
 import { type Meta, type StoryFn } from "@storybook/react";
 import React from "react";
+import { RuffleProps } from "../types/ruffle";
 import Ruffle from "./ruffle";
 
 

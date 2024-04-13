@@ -115,8 +115,8 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "emitDeclarationOnly": true,
-    "rootDir": "src"
+    "emitDeclarationOnly": true
+    // "rootDir": "src",
     // "baseUrl": ".",
     // "paths": {
     //   "*": ["types/*"]
