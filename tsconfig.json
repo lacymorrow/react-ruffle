@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/components/types/*"]
-    },
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
@@ -114,12 +110,16 @@
     "jsx": "react",
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "src/components/types",
+    "declarationDir": "src/components",
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true
-  },
-  "include": ["src/**/*", "types/**/*"]
+    // "baseUrl": ".",
+    // "paths": {
+    //   "*": ["types/*"]
+    // }
+  }
+  // "include": ["src/**/*", "types/**/*"]
 }

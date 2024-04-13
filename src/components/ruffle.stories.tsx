@@ -1,7 +1,7 @@
 import { type Meta, type StoryFn } from "@storybook/react";
 import React from "react";
 import Ruffle from "./ruffle";
-import { RuffleProps } from "./types/ruffle";
+
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
