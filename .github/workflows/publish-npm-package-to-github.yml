@@ -19,7 +19,7 @@ jobs:
       # - run: npm run chromatic
 
       - run: |
-          echo @lexacode:https://npm.pkg.github.com/ > .npmrc
+          echo @lacymorrow:https://npm.pkg.github.com/ > .npmrc
           echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> .npmrc
       - run: npm publish
         working-directory: .
