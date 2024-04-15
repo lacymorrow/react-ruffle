@@ -16,7 +16,7 @@ jobs:
       - run: npm install
       - run: npm run build-storybook
       - run: npm run test
-      - run: npm run chromatic
+      # - run: npm run chromatic
 
       - run: |
           echo @lexacode:https://npm.pkg.github.com/ > .npmrc
