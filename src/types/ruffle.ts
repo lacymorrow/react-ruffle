@@ -4,7 +4,7 @@
  * https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html
  */
 
-interface RuffleConfig {
+export interface RuffleConfig {
 	allowScriptAccess?: boolean;
 	parameters?: null | string | URLSearchParams | Record<string, string>;
 	autoplay?: "on" | "off" | "auto";

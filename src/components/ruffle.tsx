@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { RuffleProps } from "../types/ruffle";
+import { RuffleConfig, RuffleProps } from "../types/ruffle";
 
 // It would be great to load ruffle locally, rather than using unpkg.com
 // However, bundling the ruffle library with the project is not trivial
@@ -9,7 +9,7 @@ export const Ruffle = ({ src, config, children, ...rest }: RuffleProps) => {
   // Default Configuration values for Ruffle
   // See values in the Ruffle docs: https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html
 
-  const defaultConfig = {};
+  const defaultConfig: RuffleConfig = {};
 
   // Merge default config with user config
   const mergedConfig = { ...defaultConfig, ...config };
