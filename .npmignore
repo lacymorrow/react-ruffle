@@ -1,4 +1,9 @@
 # Ignore some files when building the plugin
+.storybook
+.github
+.vscode
+node_modules
+src
 
 # Ignore the static directory: contains files used in the readme
 static

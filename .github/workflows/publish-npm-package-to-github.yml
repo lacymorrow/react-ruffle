@@ -1,0 +1,27 @@
+name: Publish
+on:
+  release:
+    types: [created]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm run build-storybook
+      - run: npm run test
+      - run: npm run chromatic
+
+      - run: |
+          echo @lexacode:https://npm.pkg.github.com/ > .npmrc
+          echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> .npmrc
+      - run: npm publish
+        working-directory: .
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
