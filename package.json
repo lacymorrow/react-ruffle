@@ -1,7 +1,9 @@
 {
   "name": "react-ruffle",
   "version": "1.0.4",
+  "_id": "react-ruffle@1.0.4",
   "description": "Render the README.md file of a GitHub Repository in React",
+  "readme": "README.md",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
@@ -84,7 +86,5 @@
   "peerDependencies": {
     "react": "18",
     "react-dom": "18"
-  },
-  "readme": "README.md",
-  "_id": "react-ruffle@1.0.4"
+  }
 }
