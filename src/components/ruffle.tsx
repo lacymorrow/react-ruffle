@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { RuffleConfig, RuffleProps } from "../types/ruffle";
+import React, { useEffect, useRef } from "react";
+import { RuffleConfig, RufflePlayerElement, RuffleProps } from "../types/ruffle";
 
 // It would be great to load ruffle locally, rather than using unpkg.com
 // However, bundling the ruffle library with the project is not trivial
 // import "../vendor/ruffle.js";
 
-export const Ruffle = ({ src, config, children, ...rest }: RuffleProps) => {
+export const Ruffle = ({ src, config, onFSCommand, children, ...rest }: RuffleProps) => {
   // Default Configuration values for Ruffle
   // See values in the Ruffle docs: https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html
 
@@ -14,43 +14,49 @@ export const Ruffle = ({ src, config, children, ...rest }: RuffleProps) => {
   // Merge default config with user config
   const mergedConfig = { ...defaultConfig, ...config };
 
-  // Load Ruffle library
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Load Ruffle library and create player instance
   useEffect(() => {
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    let player: RufflePlayerElement | null = null;
+
     // Create script tag with Ruffle library
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@ruffle-rs/ruffle";
     script.async = true;
     script.onload = () => {
-      window.RufflePlayer = window.RufflePlayer || {};
-      window.RufflePlayer.config = mergedConfig;
+      const ruffle = window.RufflePlayer.newest();
+      player = ruffle.createPlayer();
+      container.appendChild(player);
+      player.load({ url: src, ...mergedConfig });
+
+      if (onFSCommand) {
+        player.onFSCommand = onFSCommand;
+      }
     };
 
     // Add script tag to body
     document.body.appendChild(script);
 
     return () => {
+      // Remove player from container
+      if (player && container.contains(player)) {
+        container.removeChild(player);
+      }
       // Remove script tag from body
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
   return (
-    <>
-      <object data={src} {...rest}>
-        <param name="movie" value={src} />
-        {children ? (
-          children
-        ) : (
-          <p>
-            Your browser does not support WASM,{" "}
-            <a href="https://ruffle.rs/" rel="noopener noreferrer">
-              see Ruffle documentation
-            </a>{" "}
-            for more information.
-          </p>
-        )}
-      </object>
-    </>
+    <div ref={containerRef} {...rest}>
+      {children}
+    </div>
   );
 };
 
