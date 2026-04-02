@@ -47,20 +47,30 @@ export interface RuffleConfig {
 	playerRuntime?: "air" | "flashPlayer";
 }
 
-export interface RuffleProps
-	extends React.ObjectHTMLAttributes<HTMLObjectElement> {
+export interface RuffleProps extends React.HTMLAttributes<HTMLDivElement> {
 	src: string;
 	config?: RuffleConfig;
 	children?: React.ReactNode;
+	onFSCommand?: (command: string, args: string) => boolean;
 }
 
-type Ruffle = React.FC<RuffleProps>
+type RuffleFC = React.FC<RuffleProps>
+
+export interface RufflePlayerElement extends HTMLElement {
+	load: (options: { url: string } & RuffleConfig) => Promise<void>;
+	onFSCommand: ((command: string, args: string) => boolean) | null;
+}
+
+export interface RuffleSource {
+	createPlayer: () => RufflePlayerElement;
+}
 
 // Extend the Window object to include RufflePlayer
 declare global {
 	interface Window {
 		RufflePlayer: {
-			config: RuffleConfig;
+			config?: RuffleConfig;
+			newest: () => RuffleSource;
 		};
 	}
 }

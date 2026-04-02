@@ -16,6 +16,7 @@ Read the [Ruffle documentation](https://ruffle.rs/) for more information.
 * Renders Flash content in React
 * Uses the Ruffle emulator
 * Supports ActionScript and Flash media
+* Supports `onFSCommand` callbacks for Flash-to-JavaScript communication
 * Click to play animated content
 
 ## Demo
@@ -29,6 +30,10 @@ Using [NPM](https://npmjs.com):
 ```bash
 npm install react-ruffle
 ```
+
+## Requirements
+
+React 18 or 19.
 
 ## Usage
 
@@ -51,6 +56,16 @@ import { Flash } from "react-ruffle";
 }}>
   <p>This content will be displayed if the Flash content cannot be rendered.</p>
 </Flash>
+
+// ...or, with an FSCommand callback
+
+<Flash
+  src="path/to/my.swf"
+  onFSCommand={(command, args) => {
+    console.log("FSCommand received:", command, args);
+    return true;
+  }}
+/>
 ```
 
 > **Note: Both `<Flash />` and `<Ruffle />` components are exported. They are identical.**
@@ -61,7 +76,7 @@ import { Flash } from "react-ruffle";
 
 The path to the Flash media file.
 
-*Required*  
+*Required*
 Type: `string`
 
 ### `props.config`
@@ -72,17 +87,34 @@ These options are passed directly to the ruffle player. The full list of options
 
 Read the [ruffle documentation](https://ruffle.rs/docs/ruffle-configuration/) for more information.
 
-*Optional*  
+*Optional*
 Type: `Object`
+
+### `props.onFSCommand`
+
+A callback invoked when Flash content calls the `FSCommand` function. Receives `command` (string) and `args` (string) parameters and should return a boolean.
+
+This enables Flash-to-JavaScript communication. See the [Ruffle player API docs](https://ruffle.rs/js-docs/master/classes/RufflePlayer.html) for details.
+
+*Optional*
+Type: `(command: string, args: string) => boolean`
 
 ### `props.children`
 
-The fallback content to display if the Flash media cannot be rendered.
+Fallback content to display while the Flash media is loading.
 
 *Optional*
 Type: `ReactNode`
 
-**All other props are passed directly to the root `<object>` element returned by this library.**
+**All other props are passed directly to the root `<div>` element returned by this library.**
+
+## Breaking Changes in v2
+
+Version 2.0.0 introduces the following breaking changes:
+
+* The component now renders a `<div>` container instead of an `<object>` element. Any props previously passed to `<object>` (e.g. `data`, HTML object attributes) are no longer supported; use `props.src` and `props.config` instead.
+* The component now uses the Ruffle JS API (`window.RufflePlayer.newest()`) to create and manage the player instance directly, rather than relying on Ruffle's automatic embed detection via `<object>` tags.
+* Peer dependency updated to `react >= 18` (supports React 18 and 19).
 
 ## License
 
