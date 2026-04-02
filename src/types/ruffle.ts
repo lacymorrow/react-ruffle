@@ -54,8 +54,6 @@ export interface RuffleProps extends React.HTMLAttributes<HTMLDivElement> {
 	onFSCommand?: (command: string, args: string) => boolean;
 }
 
-type RuffleFC = React.FC<RuffleProps>
-
 export interface RufflePlayerElement extends HTMLElement {
 	load: (options: { url: string } & RuffleConfig) => Promise<void>;
 	onFSCommand: ((command: string, args: string) => boolean) | null;

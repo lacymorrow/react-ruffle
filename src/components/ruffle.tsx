@@ -1,61 +1,92 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { RuffleConfig, RufflePlayerElement, RuffleProps } from "../types/ruffle";
 
-// It would be great to load ruffle locally, rather than using unpkg.com
-// However, bundling the ruffle library with the project is not trivial
-// import "../vendor/ruffle.js";
+const RUFFLE_CDN = "https://unpkg.com/@ruffle-rs/ruffle@0.1.0";
+
+// Global singleton: one script tag shared across all Ruffle instances
+let ruffleScriptPromise: Promise<void> | null = null;
+
+function loadRuffleScript(): Promise<void> {
+  if (ruffleScriptPromise) return ruffleScriptPromise;
+
+  // Check if already loaded (e.g. user added script manually)
+  if (window.RufflePlayer) {
+    ruffleScriptPromise = Promise.resolve();
+    return ruffleScriptPromise;
+  }
+
+  ruffleScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = RUFFLE_CDN;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load Ruffle script"));
+    document.body.appendChild(script);
+  });
+
+  return ruffleScriptPromise;
+}
 
 export const Ruffle = ({ src, config, onFSCommand, children, ...rest }: RuffleProps) => {
-  // Default Configuration values for Ruffle
-  // See values in the Ruffle docs: https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html
-
-  const defaultConfig: RuffleConfig = {};
-
-  // Merge default config with user config
-  const mergedConfig = { ...defaultConfig, ...config };
-
   const containerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<RufflePlayerElement | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
-  // Load Ruffle library and create player instance
+  // Stable config reference for the effect
+  const mergedConfig = { ...config };
+
+  // Initialize player once on mount, tear down on unmount
   useEffect(() => {
-    if (!containerRef.current) return;
+    let cancelled = false;
 
-    const container = containerRef.current;
-    let player: RufflePlayerElement | null = null;
+    loadRuffleScript().then(() => {
+      if (cancelled || !containerRef.current) return;
 
-    // Create script tag with Ruffle library
-    const script = document.createElement("script");
-    script.src = "https://unpkg.com/@ruffle-rs/ruffle";
-    script.async = true;
-    script.onload = () => {
       const ruffle = window.RufflePlayer.newest();
-      player = ruffle.createPlayer();
-      container.appendChild(player);
-      player.load({ url: src, ...mergedConfig });
+      const player = ruffle.createPlayer();
+      containerRef.current.appendChild(player);
+      playerRef.current = player;
 
+      player.load({ url: src, ...mergedConfig });
       if (onFSCommand) {
         player.onFSCommand = onFSCommand;
       }
-    };
-
-    // Add script tag to body
-    document.body.appendChild(script);
+      setIsReady(true);
+    });
 
     return () => {
-      // Remove player from container
-      if (player && container.contains(player)) {
+      cancelled = true;
+      const player = playerRef.current;
+      const container = containerRef.current;
+      if (player && container && container.contains(player)) {
         container.removeChild(player);
       }
-      // Remove script tag from body
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
+      playerRef.current = null;
+      setIsReady(false);
     };
-  }, []);
+    // Re-create the player when src changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src]);
+
+  // Update config on existing player when config changes
+  const configKey = JSON.stringify(config);
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.load({ url: src, ...mergedConfig });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configKey]);
+
+  // Update FSCommand handler without recreating the player
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.onFSCommand = onFSCommand ?? null;
+  }, [onFSCommand]);
 
   return (
     <div ref={containerRef} {...rest}>
-      {children}
+      {!isReady && children}
     </div>
   );
 };
