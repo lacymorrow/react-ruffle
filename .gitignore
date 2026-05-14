@@ -132,3 +132,4 @@ out
 dist
 ./dist
 package
+.DS_Store
