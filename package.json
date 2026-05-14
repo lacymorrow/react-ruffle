@@ -23,13 +23,16 @@
     "url": "git+https://github.com/lacymorrow/react-ruffle.git"
   },
   "keywords": [
-    "javascript",
-    "typescript",
     "react",
     "flash",
     "swf",
     "ruffle",
-    "wasm"
+    "wasm",
+    "actionscript",
+    "adobe-flash",
+    "emulator",
+    "react-component",
+    "typescript"
   ],
   "author": {
     "name": "Lacy Morrow",
