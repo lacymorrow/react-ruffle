@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Node 18 is excluded: a transitive build-time dep (serialize-javascript)
+        # uses `crypto.randomUUID()` as a top-level global, which isn't exposed
+        # on Node 18 (Node ≥ 19 only).
+        node: ["20", "22"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm install --ignore-scripts
+
+      - name: Build (rollup)
+        run: npm run rollup
+
+      - name: Verify output bundles
+        run: |
+          test -f dist/cjs/index.js
+          test -f dist/esm/index.js
+          test -f dist/index.d.ts

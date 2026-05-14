@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/lacymorrow/react-ruffle/discussions
+    about: Ask questions or share patterns.
+  - name: Storybook
+    url: https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle
+    about: Live interactive demo.
+  - name: Ruffle (upstream emulator)
+    url: https://github.com/ruffle-rs/ruffle
+    about: Ruffle itself — report Flash rendering bugs here.

@@ -1,0 +1,60 @@
+name: Bug report
+description: Flash content didn't render correctly, crashed, or behaved unexpectedly
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: react-ruffle version
+      placeholder: "2.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: react
+    attributes:
+      label: React version
+      placeholder: "19.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: env
+    attributes:
+      label: Environment
+      options:
+        - Browser
+        - Next.js (client only)
+        - Storybook
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: swf
+    attributes:
+      label: SWF source
+      description: Where the Flash file comes from (URL pattern, file size, whether it loads in standalone Ruffle)
+      placeholder: "Public domain SWF served from a Next.js public/ dir, ~200KB"
+
+  - type: textarea
+    id: usage
+    attributes:
+      label: Component usage
+      render: jsx
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+    validations:
+      required: true
