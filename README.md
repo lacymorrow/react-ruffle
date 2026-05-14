@@ -94,6 +94,12 @@ Any other props are forwarded to the wrapper `<div>`.
 - The component drives Ruffle directly via `window.RufflePlayer.newest()` rather than relying on Ruffle's automatic `<object>` detection.
 - Peer dependency: `react >= 18` (supports 18 and 19).
 
+## Playground
+
+➔ **[Open in StackBlitz](https://stackblitz.com/github/lacymorrow/react-ruffle/tree/main/examples/stackblitz?file=src/main.tsx)** — minimal Vite + React + TS demo rendering a public-domain SWF via `<Flash />`.
+
+Local copy: [`examples/stackblitz/`](./examples/stackblitz)
+
 ## Related
 
 - [Ruffle](https://ruffle.rs/) — the actual Flash emulator.
