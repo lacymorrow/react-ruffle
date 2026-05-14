@@ -16,7 +16,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: ["18", "20", "22"]
+        # Node 18 is excluded: a transitive build-time dep (serialize-javascript)
+        # uses `crypto.randomUUID()` as a top-level global, which isn't exposed
+        # on Node 18 (Node ≥ 19 only).
+        node: ["20", "22"]
 
     steps:
       - uses: actions/checkout@v4

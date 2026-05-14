@@ -53,7 +53,7 @@ import { Flash } from "react-ruffle";
     },
   }}
 >
-  <p>Your browser can't display Flash. Sorry, this one's a relic.</p>
+  <p>Loading Flash content…</p>
 </Flash>
 ```
 
@@ -84,7 +84,7 @@ import { Flash } from "react-ruffle";
 | `src` | `string` | ✅ | Path or URL to a `.swf` file |
 | `config` | `object` | | Forwarded to the Ruffle player. See [Ruffle's load options](https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html). |
 | `onFSCommand` | `(command: string, args: string) => boolean` | | Receives FSCommand calls from Flash. See [Ruffle's player API](https://ruffle.rs/js-docs/master/classes/RufflePlayer.html). |
-| `children` | `ReactNode` | | Fallback content while the WASM loads (or if Ruffle can't render). |
+| `children` | `ReactNode` | | Rendered while the Ruffle engine is initializing. Once the player instance is ready (which happens before SWF content actually plays), the children are replaced by the player container. |
 
 Any other props are forwarded to the wrapper `<div>`.
 
