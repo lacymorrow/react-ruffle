@@ -1,121 +1,112 @@
+<div align="center">
+  <a href="https://github.com/lacymorrow/react-ruffle">
+    <img src=".github/assets/logo-horizontal.svg" alt="react-ruffle" width="360">
+  </a>
 
-# react-ruffle [<img src="https://github.com/lacymorrow/crossover/raw/master/src/static/meta/patreon-button.webp" style="height:40px;" height="40" align="right" alt="Support this project" />](https://www.patreon.com/bePatron?u=55065733)
+  <p><strong>Render Flash content in React</strong> ➔ a thin wrapper around the Rust-powered <a href="https://ruffle.rs/">Ruffle</a> emulator.</p>
 
-[![npm version](https://badge.fury.io/js/react-ruffle.svg)](https://badge.fury.io/js/react-ruffle) [![Known Vulnerabilities](https://snyk.io/test/github/lacymorrow/react-ruffle/badge.svg)](https://snyk.io/test/github/lacymorrow/react-ruffle) [![Maintainability](https://api.codeclimate.com/v1/badges/05ee4efc2d29918f2ba1/maintainability)](https://codeclimate.com/github/lacymorrow/react-ruffle/maintainability)
+  <p>
+    <a href="https://www.npmjs.com/package/react-ruffle"><img alt="npm version" src="https://img.shields.io/npm/v/react-ruffle?style=flat"></a>
+    <a href="https://www.npmjs.com/package/react-ruffle"><img alt="npm downloads" src="https://img.shields.io/npm/dm/react-ruffle?style=flat"></a>
+    <a href="https://github.com/lacymorrow/react-ruffle/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/lacymorrow/react-ruffle/ci.yml?style=flat&label=CI"></a>
+    <a href="./LICENSE"><img alt="License" src="https://img.shields.io/npm/l/react-ruffle?style=flat"></a>
+    <a href="https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle"><img alt="Storybook" src="https://img.shields.io/badge/Storybook-demo-ff4785?style=flat"></a>
+  </p>
+</div>
 
-> Render Flash media in React
+---
 
-A React component for rendering Flash & ActionScript content using the Rust-based ruffle emulator.
-
-**Ruffle is a Flash Player emulator built in the Rust programming language.**
-
-Read the [Ruffle documentation](https://ruffle.rs/) for more information.
+> [!NOTE]
+> [Ruffle](https://ruffle.rs/) is a Flash Player emulator built in Rust. `react-ruffle` is a small React component that creates and manages a Ruffle player instance — that's it. The heavy lifting belongs to Ruffle.
 
 ## Features
 
-* Renders Flash content in React
-* Uses the Ruffle emulator
-* Supports ActionScript and Flash media
-* Supports `onFSCommand` callbacks for Flash-to-JavaScript communication
-* Click to play animated content
-
-## Demo
-
-### [**Storybook Demo**](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle&buildNumber=2&k=6532904658dcf2e0c272b337-1200px-interactive-true&h=6&b=-1)
+- Renders SWF / ActionScript content inside a React component
+- Click-to-play with fallback content while the WASM loads
+- Optional `onFSCommand` callback for Flash-to-JavaScript communication
+- Passes any Ruffle config option straight through
+- React 18 **and** 19 supported
 
 ## Install
-
-Using [NPM](https://npmjs.com):
 
 ```bash
 npm install react-ruffle
 ```
-
-## Requirements
-
-React 18 or 19.
 
 ## Usage
 
 ```jsx
 import { Flash } from "react-ruffle";
 
-// ...
+<Flash src="path/to/my.swf" />;
+```
 
-<Flash src="path/to/my.swf" />
+### With config and fallback content
 
-// ...or, with configuration and fallback content
-
-<Flash src="path/to/my.swf" config={{
-    // Ruffle configuration options
+```jsx
+<Flash
+  src="path/to/my.swf"
+  config={{
     autoplay: "off",
     parameters: {
-        // Parameters to pass to the Flash content
-        // AKA: FlashVars
-    }
-}}>
-  <p>This content will be displayed if the Flash content cannot be rendered.</p>
+      // FlashVars
+    },
+  }}
+>
+  <p>Your browser can't display Flash. Sorry, this one's a relic.</p>
 </Flash>
+```
 
-// ...or, with an FSCommand callback
+### Flash-to-JavaScript
 
+```jsx
 <Flash
   src="path/to/my.swf"
   onFSCommand={(command, args) => {
-    console.log("FSCommand received:", command, args);
+    console.log("FSCommand:", command, args);
     return true;
   }}
 />
 ```
 
-> **Note: Both `<Flash />` and `<Ruffle />` components are exported. They are identical.**
+> [!TIP]
+> Live interactive demo on [Chromatic / Storybook](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle).
+
+> [!NOTE]
+> `<Flash />` and `<Ruffle />` are **aliases** — import whichever name reads better in your codebase.
 
 ## API
 
-### `props.src`
+### `<Flash />` (alias: `<Ruffle />`)
 
-The path to the Flash media file.
+| Prop | Type | Required | Description |
+|---|---|:---:|---|
+| `src` | `string` | ✅ | Path or URL to a `.swf` file |
+| `config` | `object` | | Forwarded to the Ruffle player. See [Ruffle's load options](https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html). |
+| `onFSCommand` | `(command: string, args: string) => boolean` | | Receives FSCommand calls from Flash. See [Ruffle's player API](https://ruffle.rs/js-docs/master/classes/RufflePlayer.html). |
+| `children` | `ReactNode` | | Fallback content while the WASM loads (or if Ruffle can't render). |
 
-*Required*
-Type: `string`
+Any other props are forwarded to the wrapper `<div>`.
 
-### `props.config`
+## Breaking changes in v2
 
-Ruffle configuration options.
+- The component now renders a `<div>` rather than an `<object>`. Old `<object>`-specific props (e.g. raw `data`) are no longer supported — use `src` and `config` instead.
+- The component drives Ruffle directly via `window.RufflePlayer.newest()` rather than relying on Ruffle's automatic `<object>` detection.
+- Peer dependency: `react >= 18` (supports 18 and 19).
 
-These options are passed directly to the ruffle player. The full list of options are listed in [the Ruffle API documentation](https://ruffle.rs/js-docs/master/interfaces/BaseLoadOptions.html).
+## Related
 
-Read the [ruffle documentation](https://ruffle.rs/docs/ruffle-configuration/) for more information.
+- [Ruffle](https://ruffle.rs/) — the actual Flash emulator.
+- Other utilities by the author: [shipx](https://github.com/lacymorrow/shipx) · [react-is-online-context](https://github.com/lacymorrow/react-is-online-context) · [react-github-readme-md](https://github.com/lacymorrow/react-github-readme-md).
 
-*Optional*
-Type: `Object`
+## Acknowledgments
 
-### `props.onFSCommand`
-
-A callback invoked when Flash content calls the `FSCommand` function. Receives `command` (string) and `args` (string) parameters and should return a boolean.
-
-This enables Flash-to-JavaScript communication. See the [Ruffle player API docs](https://ruffle.rs/js-docs/master/classes/RufflePlayer.html) for details.
-
-*Optional*
-Type: `(command: string, args: string) => boolean`
-
-### `props.children`
-
-Fallback content to display while the Flash media is loading.
-
-*Optional*
-Type: `ReactNode`
-
-**All other props are passed directly to the root `<div>` element returned by this library.**
-
-## Breaking Changes in v2
-
-Version 2.0.0 introduces the following breaking changes:
-
-* The component now renders a `<div>` container instead of an `<object>` element. Any props previously passed to `<object>` (e.g. `data`, HTML object attributes) are no longer supported; use `props.src` and `props.config` instead.
-* The component now uses the Ruffle JS API (`window.RufflePlayer.newest()`) to create and manage the player instance directly, rather than relying on Ruffle's automatic embed detection via `<object>` tags.
-* Peer dependency updated to `react >= 18` (supports React 18 and 19).
+- The [Ruffle team](https://github.com/ruffle-rs/ruffle) — for keeping Flash content alive in a post-Flash world.
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Lacy Morrow](http://lacymorrow.com)
+[MIT](./LICENSE) © [Lacy Morrow](https://lacymorrow.com)
+
+<div align="center">
+  <sub>If this saved you time, consider <a href="https://github.com/sponsors/lacymorrow">sponsoring on GitHub</a>, <a href="https://patreon.com/lacymorrow">supporting on Patreon</a>, or <a href="https://buymeacoffee.com/lm">buying a coffee</a>.</sub>
+</div>

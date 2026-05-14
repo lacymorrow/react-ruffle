@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <title>react-ruffle</title>
+  <!-- Rounded square — Flash orange -->
+  <rect x="16" y="16" width="224" height="224" rx="48" fill="#ea580c"/>
+  <!-- Lightning bolt (Flash) -->
+  <path d="M148 40 L80 144 L120 144 L108 216 L176 112 L136 112 L148 40 Z" fill="#ffffff"/>
+</svg>

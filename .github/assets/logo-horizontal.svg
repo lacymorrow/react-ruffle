@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 733 200" fill="none">
+  <title>react-ruffle</title>
+  <g transform="translate(20, 20)">
+    <rect x="0" y="0" width="160" height="160" rx="34" fill="#ea580c"/>
+    <path d="M82 15 L40 80 L65 80 L57 130 L100 65 L75 65 L82 15 Z" fill="#ffffff"/>
+  </g>
+  <text
+    x="210"
+    y="132"
+    font-family="ui-sans-serif, system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, sans-serif"
+    font-size="120"
+    font-weight="800"
+    letter-spacing="-6"
+    fill="#1a0b1f"
+  >react-ruffle</text>
+</svg>
