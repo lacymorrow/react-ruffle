@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { RuffleConfig, RufflePlayerElement, RuffleProps } from "../types/ruffle";
 
-const RUFFLE_CDN = "https://unpkg.com/@ruffle-rs/ruffle@0.1.0";
+// Resolves to the latest published Ruffle build. Earlier versions of this
+// component pinned to @0.1.0, which the @ruffle-rs/ruffle npm package no
+// longer publishes (current versions are 0.2.0-nightly.*).
+const RUFFLE_CDN = "https://unpkg.com/@ruffle-rs/ruffle";
 
 // Global singleton: one script tag shared across all Ruffle instances
 let ruffleScriptPromise: Promise<void> | null = null;

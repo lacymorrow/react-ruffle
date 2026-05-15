@@ -99,7 +99,7 @@ Any other props are forwarded to the wrapper `<div>`.
 
 ## Playground
 
-➔ **[Open in StackBlitz](https://stackblitz.com/github/lacymorrow/react-ruffle/tree/main/examples/stackblitz?file=src/main.tsx)** — minimal Vite + React + TS demo rendering a public-domain SWF via `<Flash />`.
+➔ **[Open in StackBlitz](https://stackblitz.com/github/lacymorrow/react-ruffle/tree/main/examples/stackblitz)** — minimal Vite + React + TS demo rendering a public-domain SWF via `<Flash />`.
 
 Local copy: [`examples/stackblitz/`](./examples/stackblitz)
 

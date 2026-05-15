@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>react-ruffle · StackBlitz demo</title>
+    <!--
+      Preload the Ruffle CDN script so `window.RufflePlayer` is defined before
+      the component mounts. react-ruffle <= 2.0.0 hardcodes a CDN URL pinned
+      to a version that no longer exists on npm; preloading bypasses its loader.
+    -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
       body{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;margin:0;padding:2rem;background:#1c0a02;color:#fed7aa}
       .wrap{max-width:600px;margin:2rem auto;text-align:center}
