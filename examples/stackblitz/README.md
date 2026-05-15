@@ -4,7 +4,7 @@ A minimal Vite + React + TypeScript app that renders a Flash SWF using `<Flash /
 
 ## Open it live
 
-➔ **[Open in StackBlitz](https://stackblitz.com/github/lacymorrow/react-ruffle/tree/main/examples/stackblitz?file=src/main.tsx)**
+➔ **[Open in StackBlitz](https://stackblitz.com/github/lacymorrow/react-ruffle/tree/main/examples/stackblitz)**
 
 ## Run locally
 
