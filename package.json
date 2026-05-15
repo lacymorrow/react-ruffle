@@ -69,7 +69,7 @@
     "@types/react-dom": "^19.0.0",
     "@types/whatwg-fetch": "^0.0.33",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
-    "babel-jest": "^29.7.0",
+    "babel-jest": "^30.4.1",
     "css-loader": "^7.1.2",
     "extract-zip": "^2.0.1",
     "generate-github-markdown-css": "^6.0.0",
