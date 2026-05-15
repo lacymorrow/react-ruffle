@@ -1,6 +1,9 @@
 <div align="center">
   <a href="https://github.com/lacymorrow/react-ruffle">
-    <img src=".github/assets/logo-horizontal.svg" alt="react-ruffle" width="360">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-horizontal-dark.svg">
+      <img src=".github/assets/logo-horizontal.svg" alt="react-ruffle" width="360">
+    </picture>
   </a>
 
   <p><strong>Render Flash content in React</strong> ➔ a thin wrapper around the Rust-powered <a href="https://ruffle.rs/">Ruffle</a> emulator.</p>
