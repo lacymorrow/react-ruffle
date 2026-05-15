@@ -73,7 +73,7 @@ import { Flash } from "react-ruffle";
 ```
 
 > [!TIP]
-> Live interactive demo on [Chromatic / Storybook](https://www.chromatic.com/component?appId=65328f2ac70fb72ddb74ff4b&csfId=lacymorrow-react-ruffle).
+> Live interactive demo on [Chromatic / Storybook](https://main--65328f2ac70fb72ddb74ff4b.chromatic.com).
 
 > [!NOTE]
 > `<Flash />` and `<Ruffle />` are **aliases** — import whichever name reads better in your codebase.
