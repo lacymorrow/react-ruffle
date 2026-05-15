@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Flash } from "react-ruffle";
 
-// A public-domain SWF served from the Ruffle project's own demo bucket.
-// Swap for your own SWF — Flash file from anywhere should work.
-const SWF = "https://ruffle.rs/demo/logo-anim.swf";
+// Bundled SWF served by Vite from `public/`. Swap for any SWF — local
+// or remote — by changing this constant.
+const SWF = "/demo.swf";
 
 function App() {
 	return (
