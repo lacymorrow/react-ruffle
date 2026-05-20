@@ -1,6 +1,6 @@
 {
   "name": "react-ruffle",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "_id": "react-ruffle@2.0.0",
   "description": "Render Flash media in React using the Rust-based Ruffle emulator",
   "readme": "README.md",
