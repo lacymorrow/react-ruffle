@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/lacymorrow/react-ruffle#readme",
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^8.0.1",
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.27.0",
