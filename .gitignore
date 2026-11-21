@@ -133,3 +133,7 @@ dist
 ./dist
 package
 .DS_Store
+
+# LAC-8854: dist/ is committed so the release workflow can publish without a build step
+!dist
+!/dist
