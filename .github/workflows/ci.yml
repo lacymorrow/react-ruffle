@@ -34,6 +34,13 @@ jobs:
       - name: Build (rollup)
         run: npm run rollup
 
+      - name: Committed dist/ matches a fresh build
+        run: |
+          if ! git diff --exit-code -- dist ':(exclude)*.map'; then
+            echo "dist/ is stale: run npm run rollup and commit it" >&2
+            exit 1
+          fi
+
       - name: Verify output bundles
         run: |
           test -f dist/cjs/index.js
